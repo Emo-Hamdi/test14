@@ -1,0 +1,23 @@
+name: Run automated tests
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  TestJob:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout project sources
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Run Test with Gradle
+        run: gradle test
